@@ -1,0 +1,84 @@
+###
+GET http://{{host}}:{{port}}/jobs
+Accept: application/json
+
+###
+GET http://{{host}}:{{port}}/schedulers
+Accept: application/json
+
+###
+GET http://{{host}}:{{port}}/scheduler/groups?schedulerName=Default
+Accept: application/json
+
+###
+GET http://{{host}}:{{port}}/scheduler/group/jobs?schedulerName=Default&groupName=group_1&operator=EQUALS
+Accept: application/json
+
+###
+POST http://{{host}}:{{port}}/scheduler/job/start
+Content-Type: application/json
+Accept: application/json
+
+//{
+//  "schedulerName": "PQL",
+//  "jobKey": {
+//    "name": "job_2",
+//    "group": "group_2"
+//  },
+//  "description": "test 2",
+//  "jobClass": "com.example.quartz.service.impl.job.DemoJob",
+//  "cronExpression": "0/5 * * * * ?"
+//}
+
+{
+  "schedulerName": "Default",
+  "jobKey": {
+    "name": "job_1",
+    "group": "group_1"
+  },
+  "description": "test 1",
+  "jobClass": "com.example.quartz.service.impl.job.DemoJob",
+  "cronExpression": "0/10 * * * * ?"
+}
+
+###
+POST http://{{host}}:{{port}}/scheduler/job/pause
+Content-Type: application/json
+Accept: application/json
+
+//{
+//  "schedulerName": "PQL",
+//  "jobKey": {
+//    "name": "job_2",
+//    "group": "group_2"
+//  }
+//}
+
+{
+  "schedulerName": "Default",
+  "jobKey": {
+    "name": "job_1",
+    "group": "group_1"
+  }
+}
+
+###
+DELETE http://{{host}}:{{port}}/scheduler/job
+Content-Type: application/json
+Accept: application/json
+
+{
+  "schedulerName": "Default",
+  "jobKey": {
+    "name": "job_3",
+    "group": "group_3"
+  }
+}
+
+//{
+//  "schedulerName": "Default",
+//  "jobKey": {
+//    "name": "job_1",
+//    "group": "group_1"
+//  }
+//}
